@@ -8,7 +8,7 @@ from sklearn.tree import DecisionTreeClassifier #Древо решений
 from sklearn.neural_network import MLPClassifier #Для нейронной сети
 from sklearn.model_selection import GridSearchCV#Для настройки Древа
 from sklearn.ensemble import RandomForestClassifier #Рандомный лес
-df = pd.read_csv('dataset4.csv')
+df = pd.read_csv('dataset3.csv')
 x = df[['Q1','Q2','Q3','Q4','Q5','Q6','Q7','Q8','Q9','Q10','Q11','Q13']].values
 y = df['Q12'].values
 
@@ -18,7 +18,7 @@ j = 0
 
 while(j < 1):
     print('--------------Меню--------------')
-    print('best - наглядно показывает лучшую модель для данного датасета\nfull - обучение всех алгоритмов на данном разбиении\nlogistic - обучение алгоритма логической регрессии\nresplit - переразбиение тестового и тренировочного сетов\nexit - выход')
+    print('best - наглядно показывает лучшую модель для данного датасета\nfull - обучение всех алгоритмов на данном разбиении\nlbfgs - обучение алгоритма lbfgs\nresplit - переразбиение тестового и тренировочного сетов\nexit - выход')
     choice = input()
     if (choice == 'full'):
         
@@ -178,10 +178,10 @@ while(j < 1):
         print('!-- Датасет был заново разбит на тестовый и тренировочный сеты --!')
         print('')
         
-    elif(choice == 'logistic'):
-        print('Логическая регрессия')
+    elif(choice == 'lbfgs'):
+        print('Нейронная сеть lbfgs')
         
-        model = LogisticRegression(max_iter=1000)
+        model =  MLPClassifier(max_iter=1000,alpha=0.001,solver='lbfgs')
         model.fit(x,y)
         
         print(model.predict([[1,1,1,1,1,1,1,1,1,1,1,1]]))
@@ -190,6 +190,7 @@ while(j < 1):
         i = 0
         cl = 0
         f = open('data.txt','a')
+    
         while (i < 1):
             print('dataset - анализ датасета\nclear - очистка данных\ninp - поштучный ввод\nreset - сброс счётчика\nback - выход из режима')
             ex = input()
@@ -234,12 +235,10 @@ while(j < 1):
                 print('-- Счётчик сброшен! --')
 
             elif(ex == 'dataset'):
-        
                 f = open('data.txt','a')
                 datas = pd.read_csv('dataset3.csv')
                 x_datas = datas[['Q1','Q2','Q3','Q4','Q5','Q6','Q7','Q8','Q9','Q10','Q11','Q13']].values
                 print(model.predict(x))
-                f.write('Данные из датасета')
                 f.write(str(model.predict(x)))
                 f.close()
 
@@ -353,6 +352,7 @@ while(j < 1):
     
     elif (choice == 'exit'):
         j = 1;
+
 
 
 
