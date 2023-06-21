@@ -281,9 +281,9 @@ while(j < 1):
         model1 = LogisticRegression(max_iter = 1000) 
         model2 = DecisionTreeClassifier()
         model3 = RandomForestClassifier(n_estimators=8)
-        model4 = MLPClassifier(max_iter=5000,alpha=0.001,solver='adam')
+        model4 = MLPClassifier(max_iter=3000,alpha=0.001,solver='adam')
         model5 = MLPClassifier(max_iter=5000,alpha=0.001,solver='sgd')
-        model6 = MLPClassifier(max_iter=5000,alpha=0.001,solver='lbfgs')
+        model6 = MLPClassifier(max_iter=3000,alpha=0.001,solver='lbfgs')
         
         for m in range(1000): #Рекомендуемое число итераций = 1000
 
