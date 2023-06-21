@@ -327,13 +327,6 @@ while(j < 1):
             sum4 = sum4 + m4[m]
             sum5 = sum5 + m5[m]
             sum6 = sum6 + m6[m]
-
-        print(sum1)
-        print(sum2)
-        print(sum3)
-        print(sum4)
-        print(sum5)
-        print(sum6)
         
 
         score1 = sum1 / 1000
