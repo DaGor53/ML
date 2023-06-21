@@ -2,13 +2,13 @@ import pandas as pd
 import numpy as np
 import sklearn
 
-from sklearn.linear_model import LogisticRegression #Логическая регрессия
+from sklearn.linear_model import LogisticRegression #Логистическая регрессия
 from sklearn.model_selection import train_test_split #Для разбиения на тестовый и тренинговый сеты
 from sklearn.tree import DecisionTreeClassifier #Древо решений
 from sklearn.neural_network import MLPClassifier #Для нейронной сети
 from sklearn.model_selection import GridSearchCV#Для настройки Древа
 from sklearn.ensemble import RandomForestClassifier #Рандомный лес
-df = pd.read_csv('dataset3.csv')
+df = pd.read_csv('dataset5.csv')
 x = df[['Q1','Q2','Q3','Q4','Q5','Q6','Q7','Q8','Q9','Q10','Q11','Q13']].values
 y = df['Q12'].values
 
@@ -94,17 +94,17 @@ while(j < 1):
             model = model3
 
         if ((s4 >= s1) and (s4>=s2) and (s4>=s3) and (s4>=s5) and (s4>=s6)):
-            model = MLPClassifier(max_iter=1000,alpha=0.001,solver='adam')
+            model = MLPClassifier(max_iter=1000,alpha=0.01,solver='adam')
             s = s4
             model = model4
         
         if ((s5 >= s1) and (s5>=s2) and (s5>=s3) and (s5>=s4) and (s5>=s6)):
-            model = MLPClassifier(max_iter=5000,alpha=0.001,solver='sgd')
+            model = MLPClassifier(max_iter=5000,alpha=0.01,solver='sgd')
             s = s5
             model = model5
 
         if ((s6 >= s1) and (s6>=s2) and (s6>=s3) and (s6>=s4) and (s6>=s5)):
-            model = MLPClassifier(max_iter=1000,alpha=0.001,solver='lbfgs')
+            model = MLPClassifier(max_iter=1000,alpha=0.01,solver='lbfgs')
             s = s6
             model = model6
     
@@ -281,9 +281,9 @@ while(j < 1):
         model1 = LogisticRegression(max_iter = 1000) 
         model2 = DecisionTreeClassifier()
         model3 = RandomForestClassifier(n_estimators=8)
-        model4 = MLPClassifier(max_iter=3000,alpha=0.001,solver='adam')
-        model5 = MLPClassifier(max_iter=5000,alpha=0.001,solver='sgd')
-        model6 = MLPClassifier(max_iter=3000,alpha=0.001,solver='lbfgs')
+        model4 = MLPClassifier(max_iter=3000,alpha=0.0001,solver='adam')
+        model5 = MLPClassifier(max_iter=5000,alpha=0.0001,solver='sgd')
+        model6 = MLPClassifier(max_iter=3000,alpha=0.0001,solver='lbfgs')
         
         for m in range(1000): #Рекомендуемое число итераций = 1000
 
@@ -336,7 +336,9 @@ while(j < 1):
         score5 = sum5 / 1000
         score6 = sum6 / 1000
 
-        print('Линейная регрессия: '+str(score1))
+        print('-- Точности моделей машинного обучения --')
+
+        print('Логистическая регрессия: '+str(score1))
         print('Древо решений: '+str(score2))
         print('Рандомный лес: '+str(score3))
         print('Нейронная сеть алгоритм adam: '+str(score4))
